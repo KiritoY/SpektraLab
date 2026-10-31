@@ -7,7 +7,8 @@
 //    Latitude (the measurement), Input / Camera, Film Format, Scene Placement
 //    and the Tone Mask.
 //  - Post-Dev is the grade on the finished scan: White Balance, Exposure,
-//    Curve and Color Balance — the rail's contents before v4.
+//    Curve, Color Balance, and Match Scan (a reference-scan fit of that
+//    grade, collapsed until it is opened).
 //
 //  The tab is a view choice, remembered across launches; neither tab's
 //  sections stop existing while the other is shown, so an edit is never lost
@@ -52,6 +53,9 @@ struct RightPanel: View {
             s.append(("exposure2", AnyView(ExposureSection(session: session))))
             s.append(("curve", AnyView(CurveSection(session: session))))
             s.append(("colorbalance", AnyView(ColorBalanceSection(session: session))))
+            // Layer 2 look match. Collapsed until opened, so the drawing's
+            // four sections stay the rail until someone asks for a scan.
+            s.append(("lookmatch", AnyView(LookMatchSection(session: session))))
             // Withdrawn while the mask system is redesigned; the section
             // itself is intact (`FeatureFlags.masks`).
             if FeatureFlags.masks { s.append(("masks", AnyView(MasksSection(session: session)))) }

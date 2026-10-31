@@ -85,6 +85,30 @@ the pointer. A pair is one item in the filmstrip and exports as one picture.
 Drag a thumbnail along the filmstrip to reorder a folder; the order is kept for
 that folder. A file dropped from Finder still opens and edits.
 
+## Match a reference scan
+
+Post-Dev → **Match Scan** (collapsed until opened) fits a JPEG or TIFF scan
+to the open frame using Layer 2 only: Exposure, Black, White, and optionally
+the print white balance. Apply writes that frame's `adjustments` into its
+sidecar. **Save style** keeps the grade in
+`~/Library/Application Support/SpektraLab/style-presets.json` and **Apply**
+on a style writes it onto whichever frame is open. Film, paper, crop and the
+settings clipboard are not part of this — the clipboard still does not copy
+Post-Dev adjustments.
+
+The fit reads the print **before** Post-Dev, inside the current crop, in
+ProPhoto RGB (γ1.8). It matches the 0.5% / 50% / 99.5% luma anchors. Contrast,
+curves, colour balance and vignette are left as they are; reset them when the
+match should describe the picture on screen. A full grade (those controls,
+per-pixel search, registering two frames) is not in this version.
+
+On an Apple silicon Mac: open a frame, let the print land, choose a JPEG or
+TIFF, Align, Apply. `LookMatchTests` covers the math and the crop sampling
+without Metal. `modern_UI/Spektrafilm/Tools/check-lookmatch.py` repeats the
+scalar cases where Xcode is not installed. Still to confirm on a Mac: the
+scan's conversion into the working space, the texture read, the section
+itself, and one real pixel through `layer2Tone`.
+
 ## Build
 
 Xcode 26.6.
