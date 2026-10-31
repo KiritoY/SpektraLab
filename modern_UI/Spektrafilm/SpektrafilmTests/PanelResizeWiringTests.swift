@@ -116,7 +116,7 @@ final class PanelResizeWiringTests: XCTestCase {
         let s = Session()
         let d = UserDefaults.standard
         let tabKey = Session.uiKey + "parametersTab"
-        let open = ["latitude", "camera", "filmFormat", "scenePlacement", "wb2", "exposure2", "curve", "colorbalance"]
+        let open = ["latitude", "camera", "filmFormat", "scenePlacement", "wb2", "exposure2", "curve", "colorbalance", "lookmatch"]
             .map { Session.uiKey + "section." + $0 } + [Session.decoupleEffectsKey]
         let keys = [tabKey] + open
         let saved = keys.map { d.object(forKey: $0) }

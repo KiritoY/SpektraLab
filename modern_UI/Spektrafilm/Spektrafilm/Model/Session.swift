@@ -159,6 +159,9 @@ final class Session: CanvasHost {
               if curvesChanged { renderer.setCurves(newValue.curves) } else { renderer.needsDraw?() }
               scheduleSave() }
     }
+    /// Reference-scan matching (Layer 2 only). A separate path from the
+    /// settings clipboard, which does not carry `adjustments`.
+    let lookMatch = LookMatchController()
     var decode: DecodeSettings {
         get {
             guard var d = focusHole?.decode else { return sidecar.decode }

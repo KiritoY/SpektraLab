@@ -460,3 +460,19 @@ Two habits that made the last rework cheap and are worth keeping:
   reach the screen, `SPEKTRAFILM_CANVAS_LOG=1` prints one line per draw with
   the base texture, the viewport and whether a drawable was available, and one
   line for any render dropped before upload.
+
+## Match a reference scan (2026-10-31)
+
+Post-Dev → **Match Scan**. Layer 2 only (`Adjustments`): pick a JPEG or TIFF,
+compare working-space luma and histograms with the cropped print, align black /
+white / mid-grey (and print white balance), apply into the sidecar, save a
+named style. Not a film-profile fit, and not a settings-clipboard group.
+How to try it, and what is deferred, is in the repository README under
+"Match a reference scan". The scalar cases also run without Xcode:
+
+```bash
+python3 Tools/check-lookmatch.py
+```
+
+`SpektrafilmTests/LookMatchTests` is the suite that runs on a Mac, including
+crop sampling. GPU / ImageIO checks are listed at the top of that file.
